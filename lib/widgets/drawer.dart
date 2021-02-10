@@ -49,55 +49,67 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     }
 
     return name == null
-        ? Center(child: LoadingJumpingLine.square(backgroundColor: Colors.red,))
-    : Drawer(
-      child:  Container(
-        color: Colors.white,
-        child: ListView(
-          padding:  EdgeInsets.all(0.0),
-          children: <Widget>[
-             UserAccountsDrawerHeader(
+        ? Center(
+            child: LoadingJumpingLine.square(
+            backgroundColor: Colors.red,
+          ))
+        : Drawer(
+            child: Container(
+              color: Colors.white,
+              child: ListView(
+                padding: EdgeInsets.all(0.0),
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
 //                TODO: Replace eventually
-              accountName: Text(name ?? ' ',
-                  style:  TextStyle(fontSize: 18, color: Colors.black)),
-              accountEmail: Text(userEmail ?? ' ',
-                  style:  TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                  )),
-              currentAccountPicture:  GestureDetector(
-                onTap: () {},
-                child:  CircleAvatar(
-                  backgroundImage:  NetworkImage(
-                      profileImage ?? 'https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg'
+                    accountName: Text(name ?? ' ',
+                        style: TextStyle(fontSize: 18, color: Colors.black)),
+                    accountEmail: Text(userEmail ?? ' ',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                        )),
+                    currentAccountPicture: GestureDetector(
+                      onTap: () {},
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(profileImage ??
+                            'https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg'),
+                      ),
+                    ),
+                    decoration: BoxDecoration(color: Colors.white),
                   ),
-                ),
-              ),
-              decoration: BoxDecoration(color: Colors.white),
-            ),
-             ListTile(
-              title:  Text(AppTitle.drawerHome,
-                  style:
-                       TextStyle(fontSize: 18, color: AppColor.themeColor)),
-              leading:  Icon(Icons.home, color: AppColor.themeColor),
-              onTap: () {
-                SharedManager.shared.currentIndex = 0;
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => DashboardScreen()));
-              },
-            ),
-             ListTile(
-              title:  Text(AppTitle.drawerDoctors,
-                  style:
-                       TextStyle(fontSize: 18, color: AppColor.themeColor)),
-              leading:
-                   Icon(Icons.local_hospital, color: AppColor.themeColor),
-              onTap: () {
-                SharedManager.shared.currentIndex = 1;
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => DoctorList()));
-              },
-            ),
+                  ListTile(
+                    title: Text(AppTitle.drawerHome,
+                        style: TextStyle(
+                            fontSize: 18, color: AppColor.themeColor)),
+                    leading: Icon(Icons.home, color: AppColor.themeColor),
+                    onTap: () {
+                      SharedManager.shared.currentIndex = 0;
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DashboardScreen()));
+                    },
+                  ),
+                  ListTile(
+                    title: Text("View Predictions",
+                        style: TextStyle(
+                            fontSize: 18, color: AppColor.themeColor)),
+                    leading:
+                        Icon(Icons.local_hospital, color: AppColor.themeColor),
+                    onTap: () {
+                      SharedManager.shared.currentIndex = 1;
+                      Navigator.of(context).pushNamed('viewpredictions');
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Scan Xray",
+                        style: TextStyle(
+                            fontSize: 18, color: AppColor.themeColor)),
+                    leading:
+                        Icon(Icons.local_hospital, color: AppColor.themeColor),
+                    onTap: () {
+                      SharedManager.shared.currentIndex = 1;
+                      Navigator.of(context).pushNamed('scanxray');
+                    },
+                  ),
 //             ListTile(
 //              title:  Text(AppTitle.drawerProfile,
 //                  style:
@@ -110,27 +122,26 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 //                    ModalRoute.withName('/TabBar'));
 //              },
 //            ),
-             ListTile(
-              title:  Text(AppTitle.drawerLogout,
-                  textDirection: SharedManager.shared.direction,
-                  style:
-                       TextStyle(fontSize: 18, color: AppColor.themeColor)),
-              leading:  Icon(Icons.settings,
-                  color: AppColor.themeColor),
-              onTap: () {
-                _save('0');
-                SharedManager.shared.currentIndex = 0;
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => MyHomePage()),
-                    ModalRoute.withName('/MyHomePage'));
-              },
+                  ListTile(
+                    title: Text(AppTitle.drawerLogout,
+                        textDirection: SharedManager.shared.direction,
+                        style: TextStyle(
+                            fontSize: 18, color: AppColor.themeColor)),
+                    leading: Icon(Icons.settings, color: AppColor.themeColor),
+                    onTap: () {
+                      _save('0');
+                      SharedManager.shared.currentIndex = 0;
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          ModalRoute.withName('/MyHomePage'));
+                    },
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
             ),
-            Divider(
-              color: Colors.grey,
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

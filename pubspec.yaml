@@ -33,7 +33,6 @@ dependencies:
   auto_size_text: 2.1.0
   shared_preferences: 0.5.7+3
   flutter_webrtc: ^0.2.2
-  image_picker: 0.6.6+5
   flutter_ringtone_player: 2.0.0
   validators: ^2.0.0+1
   webview_flutter: ^0.3.22+1
@@ -51,15 +50,11 @@ dependencies:
   mailer: ^3.0.3
   characters: ^1.0.0
   flutter_webview_plugin: ^0.3.11
-
-
-
-
-
-
-
   permission_handler: ^4.4.0+hotfix.2
 
+
+  image_picker: ^0.6.7+22
+  dio: ^3.0.10
 
 dev_dependencies:
   pedantic: ^1.9.0

@@ -49,7 +49,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       "title": "Scan X Ray Image",
       "icon": Icon(
         Icons.search,
-        color: Colors.white,
+        color: Colors.black,
         size: 40,
       ),
       "isSelect": false
@@ -58,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       "title": "View Predictions",
       "icon": Icon(
         Icons.library_books_outlined,
-        color: Colors.white,
+        color: Colors.black,
         size: 40,
       ),
       "isSelect": false
@@ -114,6 +114,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   }
                   listData[index]['isSelect'] = true;
                 });
+
+                index == 0
+                    ? Navigator.of(context).pushNamed('scanxray')
+                    : Navigator.of(context).pushNamed('viewpredictions');
                 // FindDoctorScreen
                 // switch (index) {
                 //   case 0:
@@ -135,12 +139,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
               child: Container(
                   padding: EdgeInsets.all(5),
-                  child: Material(
+                  child: Card(
                     color: (listData[index]['isSelect'])
                         ? AppColor.themeColor
-                        : Colors.black54,
-                    elevation: 2.0,
-                    borderRadius: BorderRadius.circular(5),
+                        : Colors.white,
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
                     child: Container(
                       padding: EdgeInsets.all(12),
                       child: Column(
@@ -148,16 +153,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           listData[index]['icon'],
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              setCommonText(listData[index]['title'],
-                                  Colors.white, 16.0, FontWeight.w700, 2),
-//                             SizedBox(height: 3,),
-//                             setCommonText(listData[index]['availability'], Colors.white,12.0, FontWeight.w500,2),
-                            ],
-                          )
+                          Text(
+                            listData[index]['title'],
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+//                           Column(
+//                             mainAxisAlignment: MainAxisAlignment.start,
+//                             crossAxisAlignment: CrossAxisAlignment.start,
+//                             children: <Widget>[
+//                               setCommonText(,
+//                                   Colors.black, 16.0, FontWeight.normal, 2),
+// //                             SizedBox(height: 3,),
+// //                             setCommonText(listData[index]['availability'], Colors.white,12.0, FontWeight.w500,2),
+//                             ],
+//                           )
                         ],
                       ),
                     ),
@@ -192,6 +201,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           : Container(
               color: Colors.white,
               child: ListView(
+                shrinkWrap: true,
                 children: <Widget>[
                   _setMainInformationView(),
                   _setGridViewListing()

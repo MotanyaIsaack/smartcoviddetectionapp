@@ -268,21 +268,21 @@ class _LoginPageState extends State<LoginPage> {
 
     if (status) {
       Map<String, dynamic> logindata = jsonDecode(res.body);
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('token', logindata['success']['token']);
-      localStorage.setString('user', json.encode(body['first_name']));
-      localStorage.setString('user_id', json.encode(body['user_id']));
+      final localStorage = await SharedPreferences.getInstance();
+      await localStorage.setString('token', logindata['success']['token']);
+      await localStorage.setString('user', json.encode(body['first_name']));
+      await localStorage.setString('user_id', json.encode(body['id']));
       var user_details = await Network().getUserData('details');
 
       Map userMap = jsonDecode(user_details.body);
 //      print(userMap);
       var user = User.fromJson(userMap['success']);
 
-      localStorage.setString('first_name', user.first_name);
-      localStorage.setString('last_name', user.last_name);
-      localStorage.setString('phone', user.phone_number);
-      localStorage.setString('email', user.email);
-      localStorage.setInt('id', user.id);
+      await localStorage.setString('first_name', user.first_name);
+      await localStorage.setString('last_name', user.last_name);
+      await localStorage.setString('phone', user.phone_number);
+      await localStorage.setString('email', user.email);
+      await localStorage.setInt('id', user.id);
       // //if ((user.profile_picture).contains(".jpg")) {
       //   localStorage.setString('image', user.profile_picture);
       // // }

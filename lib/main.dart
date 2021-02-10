@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:health_care/helper/constant.dart';
 import 'package:health_care/screens/doctors_screens/dashboard.dart';
+import 'package:health_care/screens/scan_xray.dart';
 import 'package:health_care/screens/user_screens/CallingScreen.dart';
 import 'package:health_care/screens/user_screens/PersonalInformations.dart';
 import 'package:health_care/screens/user_screens/AppointmentList.dart';
@@ -16,6 +17,7 @@ import 'package:health_care/screens/user_screens/finder_name.dart';
 import 'package:health_care/screens/authentication_screens/login_page.dart';
 import 'package:health_care/screens/authentication_screens//signup_page.dart';
 import 'package:health_care/screens/user_screens/dashboard.dart';
+import 'package:health_care/screens/view_predictions.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'helper/api.dart';
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xff028090),
           primaryColorDark: Color(0xff3A1772),
           primaryColorLight: Color(0xffAFA2FF),
-          accentColor: Color(0xffE3D7FF),
+          accentColor: Colors.black,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: MyHomePage(),
@@ -52,6 +54,8 @@ class MyApp extends StatelessWidget {
           DashboardScreen.routeName: (ctx) => DashboardScreen(),
           LoginPage.routeName: (ctx) => LoginPage(),
           SignupPage.routeName: (ctx) => SignupPage(),
+          'viewpredictions': (ctx) => ViewPredictions(),
+          'scanxray': (ctx) => ScanXray(),
 //          FindHospitalScreen.routeName: (ctx) => FindHospitalScreen(),
           FindDoctorScreen.routeName: (ctx) => FindDoctorScreen(),
           AppointMentList.routeName: (ctx) => AppointMentList(),
@@ -287,6 +291,7 @@ class MyHomePageState extends State<MyHomePage> {
     if (body['success']) {
       var localStorage = await SharedPreferences.getInstance();
       localStorage.remove('user');
+      localStorage.remove('user_id');
       localStorage.remove('token');
       Navigator.pushNamedAndRemoveUntil(
           context, LoginPage.routeName, (route) => false);

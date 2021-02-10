@@ -66,6 +66,18 @@ class Network {
 //    }
   }
 
+  getPredictionsData(apiUrl) async {
+    var fullUrl = _url + apiUrl;
+    await _getToken();
+    print(token);
+    return await http.get(fullUrl, headers: _setHeaders());
+//    if (response.statusCode == 200){
+//      return User.fromJson(json.decode(response.body));
+//    }else{
+//      throw Exception('Failed to load');
+//    }
+  }
+
   Future<List> getGoogleHospitals() async {
     const googleHospitalsURL =
         'https://smartcovidpredictor.azurewebsites.net/api/get_hospitals';
